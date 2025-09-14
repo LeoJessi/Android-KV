@@ -2,6 +2,10 @@
 
 引用修改至[hawk](https://github.com/orhanobut/hawk) - 2024.08.05
 
+#### 2025.09.14
+
+1. 升级MMKV版本
+
 #### 2024.08.05
 
 1. 在原来的基础上优化修改，增加MMKV、SQLite、File的存储方式
