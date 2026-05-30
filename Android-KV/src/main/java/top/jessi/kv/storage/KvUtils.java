@@ -1,6 +1,6 @@
 package top.jessi.kv.storage;
 
-final class KvUtils {
+public final class KvUtils {
 
     private KvUtils() {
         //no instance

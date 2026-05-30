@@ -14,20 +14,19 @@
   ~ limitations under the License.
   -->
 
-<manifest package="top.jessi.ilogsample"
+<manifest package="top.jessi.kv"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name="top.jessi.ilogsample.ILogSampleApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Android KV"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="top.jessi.ilogsample.ILogActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">

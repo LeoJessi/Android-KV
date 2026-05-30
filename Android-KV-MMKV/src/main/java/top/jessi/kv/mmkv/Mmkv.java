@@ -1,4 +1,4 @@
-package top.jessi.kv;
+package top.jessi.kv.mmkv;
 
 import android.content.Context;
 import android.os.Parcelable;

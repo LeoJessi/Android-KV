@@ -1,4 +1,4 @@
-package top.jessi.kv.storage;
+package top.jessi.kv.mmkv;
 
 import android.content.Context;
 
@@ -6,6 +6,9 @@ import com.tencent.mmkv.MMKV;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import top.jessi.kv.storage.KvUtils;
+import top.jessi.kv.storage.Storage;
 
 /**
  * Created by Jessi on 2023/8/19 0:33
