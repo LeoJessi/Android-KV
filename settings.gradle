@@ -1,3 +1,3 @@
 include ':sample'
-include ':Android-KV'
-include ':Android-KV-MMKV'
+include ':common'
+include ':mmkv'
