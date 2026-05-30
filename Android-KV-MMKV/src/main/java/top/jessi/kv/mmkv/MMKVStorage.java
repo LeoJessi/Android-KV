@@ -11,9 +11,10 @@ import top.jessi.kv.storage.KvUtils;
 import top.jessi.kv.storage.Storage;
 
 /**
+ * 基于 MMKV 的存储实现。
+ *
  * Created by Jessi on 2023/8/19 0:33
  * Email：17324719944@189.cn
- * Describe：MMKV存储
  */
 public class MMKVStorage implements Storage {
 

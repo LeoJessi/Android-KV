@@ -18,8 +18,8 @@ public final class SharedPreferencesStorage implements Storage {
 
     public SharedPreferencesStorage(Context context) {
         /**
-         * NEVER ever change STORAGE_TAG_DO_NOT_CHANGE and TAG_INFO.
-         * It will break backward compatibility in terms of keeping previous data
+         * 切勿修改 STORAGE_TAG_DO_NOT_CHANGE 和 TAG_INFO 的值，
+         * 否则将破坏向后兼容性，导致无法读取之前存储的数据。
          */
         String STORAGE_TAG_DO_NOT_CHANGE = "KVSP";
         preferences = context.getSharedPreferences(STORAGE_TAG_DO_NOT_CHANGE, Context.MODE_PRIVATE);
@@ -72,19 +72,18 @@ public final class SharedPreferencesStorage implements Storage {
     }
 
     /**
-     * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
-     * 当一些旧手机版本不支持apply时使用commit
+     * SharedPreferences.apply 方法的兼容类。
+     * 旧版本 Android 不支持 apply 时，自动降级为 commit。
      * <p>
-     * commit方法是同步的
-     * 使用apply进行替代，apply异步的进行写入
+     * commit 是同步写入，apply 是异步写入，优先使用 apply。
      */
     private static class SPCompat {
         private static final Method APPLY_METHOD = findApplyMethod();
 
         /**
-         * 反射查找apply的方法
+         * 通过反射查找 apply 方法
          *
-         * @return apply的方法
+         * @return apply 方法，若不存在则返回 null
          */
         @SuppressWarnings({"unchecked", "rawtypes"})
         private static Method findApplyMethod() {
@@ -98,9 +97,10 @@ public final class SharedPreferencesStorage implements Storage {
         }
 
         /**
-         * 如果找到则使用apply执行，否则使用commit
+         * 优先使用 apply 提交，若不可用则降级为 commit
          *
-         * @param editor 要提交的数据
+         * @param editor 编辑器
+         * @return true 表示提交成功
          */
         public static boolean apply(SharedPreferences.Editor editor) {
             try {

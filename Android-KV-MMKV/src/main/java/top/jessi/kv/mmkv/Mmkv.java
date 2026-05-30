@@ -11,9 +11,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * MMKV 工具类，提供高效的键值存储（可视为高性能 SharedPreferences）。
+ *
  * Created by Jessi on 2022/8/17 17:48
  * Email：17324719944@189.cn
- * Describe：MMKV工具类(可以看做高效率SP)
  */
 public class Mmkv {
     private final MMKV sMMKV;

@@ -7,6 +7,9 @@ import com.google.gson.JsonSyntaxException;
 
 import java.lang.reflect.Type;
 
+/**
+ * 基于 Gson 的序列化/反序列化实现。
+ */
 public final class GsonParser implements Parser {
 
     private final Gson gson;

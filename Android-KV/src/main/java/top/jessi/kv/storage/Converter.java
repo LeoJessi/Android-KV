@@ -1,26 +1,26 @@
 package top.jessi.kv.storage;
 
 /**
- * Used to handle encoding and decoding as an intermediate layer.
- * <p>Implement this interface if a custom implementation is needed</p>
+ * 编码/解码中间层，用于处理数据的编码与解码。
+ * <p>如需自定义实现，可实现此接口。</p>
  *
  * @see KvConverter
  */
 public interface Converter {
 
     /**
-     * Encodes the value
+     * 对值进行编码。
      *
-     * @param value will be encoded
-     * @return the encoded string
+     * @param value 待编码的值
+     * @return 编码后的字符串
      */
     <T> String toString(T value);
 
     /**
-     * Decodes
+     * 对值进行解码。
      *
-     * @param value is the encoded data
-     * @return the plain value
+     * @param value 编码后的数据
+     * @return 原始值
      */
     <T> T fromString(String value, DataInfo dataInfo) throws Exception;
 

@@ -2,6 +2,10 @@ package top.jessi.kv.storage;
 
 import java.util.Map;
 
+/**
+ * KV 门面接口，定义了键值存储的核心操作。
+ * 提供 put、get、delete、contains 等方法的统一入口。
+ */
 public interface KvFacade {
 
     <T> boolean put(String key, T value);
@@ -85,7 +89,7 @@ public interface KvFacade {
         }
 
         private void throwValidation() {
-            throw new IllegalStateException("Hawk is not built. " +
+            throw new IllegalStateException("KV is not built. " +
                     "Please call build() and wait the initialisation finishes.");
         }
     }

@@ -12,9 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * SQLite 数据库存储实现，将数据持久化到本地 SQLite 数据库中。
+ *
+ * <p>数据表包含三个字段：主键（自增）、键（唯一且非空）、值。</p>
+ *
  * Created by Jessi on 2023/8/18 11:57
  * Email：17324719944@189.cn
- * Describe：数据库存储
  */
 public class SQLiteStorage extends SQLiteOpenHelper implements Storage {
 

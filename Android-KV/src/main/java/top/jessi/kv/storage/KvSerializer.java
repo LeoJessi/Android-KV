@@ -66,14 +66,14 @@ class KvSerializer implements Serializer {
 
         char type = infos[2].charAt(0);
 
-        // if it is collection, no need to create the class object
+        // 如果是集合类型，无需创建类对象
         Class<?> keyClazz = null;
         String firstElement = infos[0];
         if (firstElement != null && firstElement.length() != 0) {
             try {
                 keyClazz = Class.forName(firstElement);
             } catch (ClassNotFoundException e) {
-                logInterceptor.onLog("HawkSerializer -> " + e.getMessage());
+                logInterceptor.onLog("KVSerializer -> " + e.getMessage());
             }
         }
 
@@ -83,7 +83,7 @@ class KvSerializer implements Serializer {
             try {
                 valueClazz = Class.forName(secondElement);
             } catch (ClassNotFoundException e) {
-                logInterceptor.onLog("HawkSerializer -> " + e.getMessage());
+                logInterceptor.onLog("KVSerializer -> " + e.getMessage());
             }
         }
 
@@ -94,7 +94,7 @@ class KvSerializer implements Serializer {
     private String getCipherText(String serializedText) {
         int index = serializedText.indexOf(DELIMITER);
         if (index == -1) {
-            throw new IllegalArgumentException("Text should contain delimiter");
+            throw new IllegalArgumentException("文本中应包含分隔符");
         }
         return serializedText.substring(index + 1);
     }

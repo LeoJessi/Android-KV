@@ -10,9 +10,10 @@ import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
+ * SharedPreferences 工具类，封装了基本类型的存取操作。
+ *
  * Created by Jessi on 2022/8/15 14:52
  * Email：17324719944@189.cn
- * Describe：sp工具类
  */
 public class Spkv {
     private final SharedPreferences mPreferences;
@@ -32,8 +33,8 @@ public class Spkv {
      * 向sp存入指定key对应的数据
      * 其中value可以是String、boolean、float、int、long等各种基本类型的值
      *
-     * @param key   key
-     * @param value value
+     * @param key   键
+     * @param value 值
      */
     public void put(String key, Object value) {
         if (value instanceof String s) {

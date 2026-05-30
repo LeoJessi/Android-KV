@@ -4,10 +4,9 @@ package top.jessi.kv.storage;
 import top.jessi.jhelper.enigma.Enigma;
 
 /**
- * 默认使用aes进行加密
- * 加密key为 MagicGalaxyX9944
- * 加密iv为 994400LeoJessi10
- * 可重写本类自定义加密解密算法
+ * 默认使用 AES 进行加密。
+ * 加密密钥为 MagicGalaxyX9944，加密 IV 为 994400LeoJessi10。
+ * 可重写本类自定义加密解密算法。
  */
 public class ConcealEncryption implements Encryption {
 

@@ -1,25 +1,29 @@
 package top.jessi.kv.storage;
 
 /**
- * Intermediate layer that is used to serialize/deserialize the cipher text
+ * 密文序列化/反序列化中间层，用于将密文与数据类型一起序列化或反序列化。
  *
- * <p>Use custom implementation if built-in implementation is not enough.</p>
+ * <p>如果内置实现不满足需求，可使用自定义实现。</p>
  *
  * @see KvSerializer
  */
 public interface Serializer {
 
     /**
-     * Serialize the cipher text along with the given data type
+     * 将密文与数据类型一起序列化。
      *
-     * @return serialized string
+     * @param cipherText 密文
+     * @param value     原始值
+     * @param <T>       值类型
+     * @return 序列化后的字符串
      */
     <T> String serialize(String cipherText, T value);
 
     /**
-     * Deserialize the given text according to given DataInfo
+     * 根据给定的 DataInfo 反序列化文本。
      *
-     * @return original object
+     * @param plainText 序列化文本
+     * @return 包含数据类型和密文的信息对象
      */
     DataInfo deserialize(String plainText);
 }

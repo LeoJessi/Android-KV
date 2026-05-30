@@ -3,67 +3,67 @@ package top.jessi.kv.storage;
 import java.util.Map;
 
 /**
- * Intermediate layer which stores the given data. Used by Hawk.
+ * 存储中间层，用于持久化数据。
  *
- * <p>Use custom implementation if the built-in implementations are not enough.</p>
+ * <p>如果内置实现不满足需求，可自行实现此接口。</p>
  *
  * @see SharedPreferencesStorage
  */
 public interface Storage {
 
     /**
-     * Put a single entry to storage
+     * 存入一条数据
      *
-     * @param key   the name of entry to put
-     * @param value the value of entry
-     * @param <T>   type of value of entry
-     * @return true if entry added successfully, otherwise false
+     * @param key   键名
+     * @param value 值
+     * @param <T>   值的类型
+     * @return 存入成功返回 true，否则返回 false
      */
     <T> boolean put(String key, T value);
 
     /**
-     * Get single entry from storage
+     * 获取一条数据
      *
-     * @param key the name of entry to get
-     * @param <T> type of value of entry
-     * @return the object related to given key
+     * @param key 键名
+     * @param <T> 值的类型
+     * @return 与键名关联的对象
      */
     <T> T get(String key);
 
     /**
      * 获取存储中的所有条目
      *
-     * @return 以Map的形式返回
+     * @return 以 Map 形式返回
      */
     <T> Map<String, T> getAll();
 
     /**
-     * Remove single entry from storage
+     * 删除一条数据
      *
-     * @param key the name of entry to delete
-     * @return true if removal is successful, otherwise false
+     * @param key 键名
+     * @return 删除成功返回 true，否则返回 false
      */
     boolean delete(String key);
 
     /**
-     * Remove all entries in the storage
+     * 清空所有数据
      *
-     * @return true if clearance if successful, otherwise false
+     * @return 清空成功返回 true，否则返回 false
      */
     boolean deleteAll();
 
     /**
-     * Retrieve count of entries in the storage
+     * 获取存储中的条目数量
      *
-     * @return entry count in the storage
+     * @return 条目数量
      */
     long count();
 
     /**
-     * Checks whether the storage contains an entry.
+     * 检查存储中是否包含指定键名的数据
      *
-     * @param key the name of entry to check
-     * @return true if the entry exists in the storage, otherwise false
+     * @param key 键名
+     * @return 存在返回 true，否则返回 false
      */
     boolean contains(String key);
 }

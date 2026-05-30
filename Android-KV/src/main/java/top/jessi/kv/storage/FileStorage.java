@@ -14,9 +14,10 @@ import top.jessi.jhelper.file.Files;
 
 
 /**
+ * 基于文件的存储实现，将键值对以 JSON 格式持久化到文件中。
+ *
  * Created by Jessi on 2023/8/30 10:37
  * Email：17324719944@189.cn
- * Describe：文件存储
  */
 public class FileStorage implements Storage {
 

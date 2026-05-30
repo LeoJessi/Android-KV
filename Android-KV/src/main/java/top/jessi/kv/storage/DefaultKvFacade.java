@@ -3,6 +3,9 @@ package top.jessi.kv.storage;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * KvFacade 的默认实现，负责协调加密、序列化、存储等组件完成数据的存取。
+ */
 public class DefaultKvFacade implements KvFacade {
 
     private final Storage storage;
@@ -17,81 +20,81 @@ public class DefaultKvFacade implements KvFacade {
         converter = builder.getConverter();
         serializer = builder.getSerializer();
         logInterceptor = builder.getLogInterceptor();
-        logInterceptor.onLog("Hawk.init -> Encryption : " + encryption.getClass().getSimpleName());
+        logInterceptor.onLog("KV.init -> Encryption : " + encryption.getClass().getSimpleName());
     }
 
     @Override
     public <T> boolean put(String key, T value) {
-        // Validate
+        // 参数校验
         KvUtils.checkNull("Key", key);
-        log("Hawk.put -> key: " + key + ", value: " + value);
+        log("KV.put -> key: " + key + ", value: " + value);
 
-        // If the value is null, delete it
+        // 如果值为 null，则删除该 key 对应的已有数据
         if (value == null) {
-            log("Hawk.put -> Value is null. Any existing value will be deleted with the given key");
+            log("KV.put -> 值为 null，将删除该 key 对应的已有数据");
             return delete(key);
         }
 
-        // 1. Convert to text
+        // 1. 转换为文本
         String plainText = converter.toString(value);
-        log("Hawk.put -> Converted to " + plainText);
+        log("KV.put -> 转换为文本: " + plainText);
         if (plainText == null) {
-            log("Hawk.put -> Converter failed");
+            log("KV.put -> 转换失败");
             return false;
         }
 
-        // 2. Encrypt the text
+        // 2. 加密文本
         String cipherText = null;
         try {
             cipherText = encryption.encrypt(key, plainText);
-            log("Hawk.put -> Encrypted to " + cipherText);
+            log("KV.put -> 加密为: " + cipherText);
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (cipherText == null) {
-            log("Hawk.put -> Encryption failed");
+            log("KV.put -> 加密失败");
             return false;
         }
 
-        // 3. Serialize the given object along with the cipher text
+        // 3. 将密文与原始对象一起序列化
         String serializedText = serializer.serialize(cipherText, value);
-        log("Hawk.put -> Serialized to " + serializedText);
+        log("KV.put -> 序列化为: " + serializedText);
         if (serializedText == null) {
-            log("Hawk.put -> Serialization failed");
+            log("KV.put -> 序列化失败");
             return false;
         }
 
-        // 4. Save to the storage
+        // 4. 保存到存储
         if (storage.put(key, serializedText)) {
-            log("Hawk.put -> Stored successfully");
+            log("KV.put -> 存储成功");
             return true;
         } else {
-            log("Hawk.put -> Store operation failed");
+            log("KV.put -> 存储操作失败");
             return false;
         }
     }
 
     @Override
     public <T> T get(String key) {
-        log("Hawk.get -> key: " + key);
+        log("KV.get -> key: " + key);
         if (key == null) {
-            log("Hawk.get -> null key, returning null value ");
+            log("KV.get -> null key, returning null value ");
             return null;
         }
 
         // 1. Get serialized text from the storage
         String serializedText = storage.get(key);
-        log("Hawk.get -> Fetched from storage : " + serializedText);
+        log("KV.get -> Fetched from storage : " + serializedText);
         if (serializedText == null) {
-            log("Hawk.get -> Fetching from storage failed");
+            log("KV.get -> Fetching from storage failed");
             return null;
         }
 
         // 2. Deserialize
         DataInfo dataInfo = serializer.deserialize(serializedText);
-        log("Hawk.get -> Deserialized");
+        log("KV.get -> Deserialized");
         if (dataInfo == null) {
-            log("Hawk.get -> Deserialization failed");
+            log("KV.get -> Deserialization failed");
             return null;
         }
 
@@ -99,12 +102,12 @@ public class DefaultKvFacade implements KvFacade {
         String plainText = null;
         try {
             plainText = encryption.decrypt(key, dataInfo.cipherText);
-            log("Hawk.get -> Decrypted to : " + plainText);
+            log("KV.get -> Decrypted to : " + plainText);
         } catch (Exception e) {
-            log("Hawk.get -> Decrypt failed: " + e.getMessage());
+            log("KV.get -> Decrypt failed: " + e.getMessage());
         }
         if (plainText == null) {
-            log("Hawk.get -> Decrypt failed");
+            log("KV.get -> Decrypt failed");
             return null;
         }
 
@@ -112,9 +115,9 @@ public class DefaultKvFacade implements KvFacade {
         T result = null;
         try {
             result = converter.fromString(plainText, dataInfo);
-            log("Hawk.get -> Converted to : " + result);
+            log("KV.get -> Converted to : " + result);
         } catch (Exception e) {
-            log("Hawk.get -> Converter failed");
+            log("KV.get -> Converter failed");
         }
 
         return result;

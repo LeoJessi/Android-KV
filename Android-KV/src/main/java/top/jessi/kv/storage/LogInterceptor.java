@@ -1,14 +1,14 @@
 package top.jessi.kv.storage;
 
 /**
- * Interceptor for all logs happens in the library
+ * 日志拦截器，用于拦截库中产生的所有日志。
  */
 public interface LogInterceptor {
 
     /**
-     * Will be triggered each time when a log is written
+     * 每次写入日志时触发。
      *
-     * @param message is the log message
+     * @param message 日志消息
      */
     void onLog(String message);
 }

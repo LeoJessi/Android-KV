@@ -10,10 +10,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Concrete implementation of encoding and decoding.
- * List types will be encoded/decoded by parser
- * Serializable types will be encoded/decoded object stream
- * Not serializable objects will be encoded/decoded by parser
+ * 编码/解码的具体实现。
+ * List 类型通过解析器进行编码/解码；
+ * 可序列化类型通过对象流进行编码/解码；
+ * 不可序列化的对象通过解析器进行编码/解码。
  */
 final class KvConverter implements Converter {
 

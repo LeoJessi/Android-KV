@@ -3,7 +3,7 @@ package top.jessi.kv.storage;
 public final class KvUtils {
 
     private KvUtils() {
-        //no instance
+        // 不允许实例化
     }
 
     public static void checkNull(String message, Object value) {
